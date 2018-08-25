@@ -1,0 +1,11 @@
+{
+    "extends": "airbnb",
+    "globals": {
+        "document":true
+    },
+    "rules": {
+        "prefer-stateless-function": "off",
+        "react/jsx-filename-extension": "off",
+        "react/prefer-stateless-function":"off"
+    }
+}
