@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing LandingBody Component should match existing snapshot 1`] = `
+<div
+  className="simple-background-image landing-body"
+>
+  <div>
+    <h1>
+      Solving your maintenance needs is what we do
+    </h1>
+    <ul
+      className="horizontal-list"
+    >
+      <li>
+        <Link
+          activeClassName="temp"
+          className="temp"
+          replace={false}
+          to="badlink.com"
+        />
+      </li>
+    </ul>
+  </div>
+</div>
+`;

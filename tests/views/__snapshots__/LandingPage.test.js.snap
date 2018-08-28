@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing LandingPage Component should match existing snapshot 1`] = `
+<div
+  id="landing-page"
+>
+  <Header />
+  <LandingBody
+    buttons={
+      Array [
+        Object {
+          "caption": "Register",
+          "className": "primary-button",
+          "link": "/signup",
+        },
+        Object {
+          "caption": "Login",
+          "className": "primary-button",
+          "link": "/login",
+        },
+      ]
+    }
+  />
+  <Footer />
+</div>
+`;

@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing social logo grid should match snapshot 1`] = `
+<ul
+  className=" horizontal-list flex-center-box"
+>
+  <li
+    key="0"
+  >
+    <a
+      href="#"
+    >
+      <img
+        alt="facebook"
+        height="auto"
+        src="https://image.flaticon.com/icons/svg/145/145802.svg"
+        width="30px"
+      />
+    </a>
+  </li>
+  <li
+    key="1"
+  >
+    <a
+      href="#"
+    >
+      <img
+        alt="linkedin"
+        height="auto"
+        src="https://image.flaticon.com/icons/svg/145/145807.svg"
+        width="30px"
+      />
+    </a>
+  </li>
+  <li
+    key="2"
+  >
+    <a
+      href="#"
+    >
+      <img
+        alt="twitter"
+        height="auto"
+        src="https://image.flaticon.com/icons/svg/145/145812.svg"
+        width="30px"
+      />
+    </a>
+  </li>
+  <li
+    key="3"
+  >
+    <a
+      href="#"
+    >
+      <img
+        alt="google"
+        height="auto"
+        src="https://image.flaticon.com/icons/svg/145/145804.svg"
+        width="30px"
+      />
+    </a>
+  </li>
+</ul>
+`;
