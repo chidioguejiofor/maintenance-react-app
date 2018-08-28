@@ -1,9 +1,9 @@
 import { Route } from 'react-router-dom';
-import Homepage from './Homepage';
-import Signup from './auth/Signup';
-import Login from './auth/Login';
-import ResetPassword from './auth/ResetPassword';
-import Dashboard from './dashboard/Dashboard';
+import Homepage from '../views/Homepage';
+import Signup from '../views/auth/Signup';
+import Login from '../views/auth/Login';
+import ResetPassword from '../views/auth/ResetPassword';
+import Dashboard from '../views/dashboard/Dashboard';
 
 
 export default [

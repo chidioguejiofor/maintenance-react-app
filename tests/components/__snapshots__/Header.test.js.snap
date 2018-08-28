@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the Header Component should have an image link that is equal to what is passed as props 1`] = `
+<div
+  className="header"
+>
+  <img
+    alt="site logo"
+    src="https://image.flaticon.com/icons/svg/949/949890.svg"
+  />
+  <span>
+    Maintenance Tracker
+  </span>
+</div>
+`;

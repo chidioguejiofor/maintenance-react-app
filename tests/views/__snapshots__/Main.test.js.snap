@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing LandingBody Component should match existing snapshot 1`] = `
+<main>
+  <Switch>
+    <Route
+      component={[Function]}
+      exact={true}
+      key="0"
+      path="/"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      key="1"
+      path="/signup"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      key="2"
+      path="/login"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      key="3"
+      path="/reset-password"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      key="4"
+      path="/dashboard"
+    />
+  </Switch>
+</main>
+`;
