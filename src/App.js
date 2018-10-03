@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
-import css from './App.css';
+import './App.css';
 import Header from './components/commons/Header';
+import Main from './views/Main';
 
 
-export default class App extends Component {
+/**
+ * This class is the basic entry for the whole system
+ */
+class App extends Component {
+  /**
+   * this renders content to the DOM
+   *@returns {JSX} returns content to be rendered in the DOM
+   */
   render() {
     return (
-      <Header />
+      <div>
+        <Header />
+        <Main />
+      </div>
+
     );
   }
 }
+
+
+export default App;
