@@ -6,7 +6,7 @@ module.exports = {
   collectCoverageFrom: ['<rootDir>/src/**/*.{js,jsx}'],
   coveragePathIgnorePatterns: [
     '<rootDir>/tests',
-    '<rootDir>/src/index.js',
+    '<rootDir>/src/index.jsx',
   ],
   testURL: 'http://localhost',
   snapshotSerializers: ['enzyme-to-json/serializer'],

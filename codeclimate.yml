@@ -7,3 +7,6 @@ plugins:
       - javascript
 exclude_patterns:
   - tests/**/*
+  - public/**/*
+  - webpack.config.js
+  - jest.config.js
