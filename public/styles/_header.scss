@@ -1,0 +1,19 @@
+#header{
+    
+    img{
+        animation: App-logo-spin infinite 1s linear;
+        width: 30px;
+        height: auto;
+        
+    }
+    
+    display:flex;
+    background-color:rgba(163,199, 91,1); 
+    align-items: center;
+    justify-content: center;
+    min-height: 10vh;
+    color:white;
+    font-size: 26px;
+    font-family: 'Righteous', sans-serif;
+
+}
