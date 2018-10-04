@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing SignUp Component the components when inputs property are empty rendered in the DOM should match snapshot 1`] = `
+<div>
+  <AuthForm
+    errorMessages={Array []}
+    formType="Sign Up"
+    handleChange={[Function]}
+    handleSubmit={[Function]}
+    inputs={
+      Array [
+        Object {
+          "name": "email",
+          "placeholder": "Email",
+          "type": "email",
+          "value": "",
+        },
+        Object {
+          "name": "username",
+          "placeholder": "Username",
+          "value": "",
+        },
+        Object {
+          "name": "password",
+          "placeholder": "Password",
+          "type": "password",
+          "value": "",
+        },
+      ]
+    }
+    links={
+      Array [
+        Object {
+          "caption": "Login",
+          "to": "/login",
+        },
+        Object {
+          "caption": "Reset Password",
+          "to": "/reset-password",
+        },
+      ]
+    }
+    loading={false}
+    messageTitle=""
+    success={true}
+  />
+</div>
+`;

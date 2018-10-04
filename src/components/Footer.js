@@ -10,7 +10,7 @@ const Footer = () => (
 
     </p>
     <p>
-    Special thanks to my Learning Facilitars and those who
+    Special thanks to my Learning Facilitators and those who
     have helped me in my journey to this point
     </p>
 

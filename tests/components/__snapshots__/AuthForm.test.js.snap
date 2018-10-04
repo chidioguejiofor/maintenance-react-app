@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing AuthForm Component the components when inputs property are empty rendered in the DOM should match snapshot 1`] = `
+<div
+  id="auth-form"
+>
+  <Header />
+  <Container>
+    <div
+      className="form"
+    >
+      <Form
+        as="form"
+        error={false}
+        loading={false}
+        onSubmit={[Function]}
+        success={true}
+      >
+        <Header
+          as="h2"
+          icon={true}
+          textAlign="center"
+        >
+          <Icon
+            as="i"
+            name="user circle"
+          />
+          <HeaderContent>
+            Sign Up
+          </HeaderContent>
+        </Header>
+        <Message
+          error={false}
+          header=""
+          hidden={false}
+          list={Array []}
+          success={true}
+        />
+        <FormButton
+          as={[Function]}
+          content="Submit"
+          control={[Function]}
+          disabled={true}
+          positive={true}
+        />
+      </Form>
+    </div>
+  </Container>
+</div>
+`;

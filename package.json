@@ -1,5 +1,5 @@
 {
-  "name": "miantenance-react",
+  "name": "maintenance-react",
   "version": "",
   "description": "maintenance app front end for the app",
   "scripts": {
@@ -8,14 +8,16 @@
     "build": "webpack --mode production --env.mode=production",
     "test": " jest",
     "update-snapshot": " jest --updateSnapshot",
-    "test-watch": "nyc jest --watch",
+    "test-watch": "nyc jest --watch --coverage",
     "coverage": "jest --coverage",
     "lint": "eslint src/",
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "is-promise": "^2.1.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
