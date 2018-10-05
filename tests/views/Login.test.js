@@ -1,8 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import chai from 'chai';
-import { Login, mapStateToProps, mapDispatchToProps } from '../../src/views/auth/Login';
-import AuthForm from '../../src/components/auth/AuthForm';
+import { Login, mapStateToProps,
+  mapDispatchToProps } from '../../src/views/auth/Login';
+import AuthForm from '../../src/components/Form';
 
 const getMounted = (options = {
   login: {

@@ -1,15 +1,18 @@
 #auth-form{
-    .form{
+    .auth{
         padding: 40px 60px;
     }
 
+    .modal{
+        padding: 10px 10px;
+    }
     .link{
         display: inline-block;
         margin-right: 10px;
         padding: 0 7px 0 0;
     }
     @media all and (max-width:715px){
-        .form{
+        .auth{
             padding: 40px 10px;
         }
     }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import AuthForm from '../../components/auth/AuthForm';
+import Form from '../../components/Form';
 import { signUp as signUpAction } from '../../actions/authAction';
+import Header from '../../components/Header';
 /**
  *contains logic for the LoginPage.
  */
@@ -48,7 +49,7 @@ export class SignUp extends Component {
     if (newProps.signup.success) {
       setTimeout(() => {
         history.push('/login');
-      }, 3000);
+      }, 1500);
     }
 
     if (newProps.signup.errors.statusCode === 409) {
@@ -111,12 +112,12 @@ export class SignUp extends Component {
 
     const links = [
       { caption: 'Login', to: '/login' },
-      { caption: 'Reset Password', to: '/reset-password' }
     ];
 
     return (
       <div>
-        <AuthForm
+        <Header />
+        <Form
           loading={signup.isLoading}
           errorMessages={signup.errors.errorMessages}
           messageTitle={signup.errors.message || signup.data.message}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import AuthForm from '../../components/auth/AuthForm';
-
+import Form from '../../components/Form';
+import Header from '../../components/Header';
 /**
  *contains logic for the LoginPage.
  */
@@ -20,7 +20,7 @@ class SignUp extends Component {
 
     // bind methods
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = () => {};
   }
 
 
@@ -36,14 +36,6 @@ class SignUp extends Component {
     this.setState({ [name]: value });
   }
 
-  /**
-   *makes an api call once the form is submitted
-   * @returns {void} dispatches an action and return void
-   */
-  handleSubmit() {
-    this.null();
-    // dispatch action here
-  }
 
   /**
    * this renders a presentation component with values gotten from state
@@ -74,15 +66,24 @@ class SignUp extends Component {
     ];
 
     const errorMessages = [];
+    const links = [
+      { caption: 'Sign Up', to: '/signup' },
+      { caption: 'Login', to: '/login' }
+    ];
     return (
-      <AuthForm
-        formType="Reset Password"
-        errorMessages={errorMessages}
-        success={success}
-        inputs={inputs}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-      />
+      <div>
+        <Header />
+        <Form
+          formTitle="Reset Password"
+          errorMessages={errorMessages}
+          success={success}
+          inputs={inputs}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          links={links}
+        />
+      </div>
+
     );
   }
 }

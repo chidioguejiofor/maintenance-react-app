@@ -14,6 +14,8 @@ const errorMiddleware = () => next => (action) => {
       };
       return next(action);
     }
+
+
     const { data: errors, status } = action.payload.response;
     const errorMessages = [];
     if (errors.missingData) {
@@ -22,7 +24,11 @@ const errorMiddleware = () => next => (action) => {
     }
     if (errors.invalidData) errorMessages.push(...errors.invalidData);
     if (status === 404) {
-      errorMessages.push(errors.messages);
+      errorMessages.push(errors.message);
+    }
+
+    if (status === 401) {
+      localStorage.token = '';
     }
     action.payload = {
       ...errors,

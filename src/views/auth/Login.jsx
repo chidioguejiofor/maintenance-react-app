@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import AuthForm from '../../components/auth/AuthForm';
+import Form from '../../components/Form';
 import { login as loginAction } from '../../actions/authAction';
-
+import Header from '../../components/Header';
 /**
  *contains logic for the LoginPage.
  */
@@ -37,7 +37,7 @@ export class Login extends Component {
     if (newProps.login.success) {
       setTimeout(() => {
         history.push('/dashboard');
-      }, 3000);
+      }, 1500);
     }
   }
 
@@ -85,20 +85,23 @@ export class Login extends Component {
     ];
     const links = [
       { caption: 'Sign Up', to: '/signup' },
-      { caption: 'Reset Password', to: '/reset-password' }
     ];
     return (
-      <AuthForm
-        loading={login.isLoading}
-        errorMessages={login.errors.errorMessages}
-        messageTitle={login.errors.message || 'Login Successfully'}
-        success={login.success}
-        formType="Login"
-        inputs={inputs}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        links={links}
-      />
+      <div>
+        <Header />
+        <Form
+          loading={login.isLoading}
+          errorMessages={login.errors.errorMessages}
+          messageTitle={login.errors.message || 'Login Successfully'}
+          success={login.success}
+          formTitle="Login"
+          inputs={inputs}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          links={links}
+        />
+      </div>
+
     );
   }
 }

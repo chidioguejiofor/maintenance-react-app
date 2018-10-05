@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the RequestModalWithForm Component the content it renders should match snapshot 1`] = `
+<span
+  id="modal-with-request"
+>
+  <Modal
+    centered={true}
+    closeOnDimmerClick={true}
+    closeOnDocumentClick={false}
+    dimmer={true}
+    eventPool="Modal"
+    size="small"
+    trigger={
+      <Button
+        as="button"
+        content="Info"
+        icon="info"
+        role="button"
+        size="small"
+      />
+    }
+  >
+    <ModalHeader>
+      I AM THE ONE THAT JUST UPDATED
+    </ModalHeader>
+    <ModalContent>
+      <Container>
+        <Image
+          as="img"
+          centered={true}
+          size="big"
+          src="sampleImage.png"
+          ui={true}
+        />
+        <div
+          className="request"
+        >
+          <Header
+            size="large"
+          >
+            Created On 
+          </Header>
+          <p>
+            Sat Oct 06 2018
+          </p>
+          <Header
+            size="large"
+          >
+            Description
+          </Header>
+          <p>
+            descriptoin 2
+          </p>
+          <Header
+            size="large"
+          >
+            Location 
+          </Header>
+          <p>
+            locatrion
+          </p>
+          <Label
+            size="large"
+          >
+            <Icon
+              as="i"
+              color="orange"
+              name="hourglass half"
+            />
+            Pending
+          </Label>
+        </div>
+      </Container>
+    </ModalContent>
+  </Modal>
+</span>
+`;

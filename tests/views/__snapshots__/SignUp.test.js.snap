@@ -2,11 +2,13 @@
 
 exports[`Testing SignUp Component the components when inputs property are empty rendered in the DOM should match snapshot 1`] = `
 <div>
+  <Header />
   <AuthForm
     errorMessages={Array []}
-    formType="Sign Up"
+    formTitle="Sign Up"
     handleChange={[Function]}
     handleSubmit={[Function]}
+    iconUrl=""
     inputs={
       Array [
         Object {
@@ -34,15 +36,13 @@ exports[`Testing SignUp Component the components when inputs property are empty 
           "caption": "Login",
           "to": "/login",
         },
-        Object {
-          "caption": "Reset Password",
-          "to": "/reset-password",
-        },
       ]
     }
     loading={false}
     messageTitle=""
+    submitLoading={false}
     success={true}
+    type="auth"
   />
 </div>
 `;

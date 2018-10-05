@@ -4,10 +4,9 @@ exports[`Testing AuthForm Component the components when inputs property are empt
 <div
   id="auth-form"
 >
-  <Header />
   <Container>
     <div
-      className="form"
+      className="auth"
     >
       <Form
         as="form"
@@ -30,6 +29,7 @@ exports[`Testing AuthForm Component the components when inputs property are empt
           </HeaderContent>
         </Header>
         <Message
+          className="text-centered"
           error={false}
           header=""
           hidden={false}
@@ -41,6 +41,7 @@ exports[`Testing AuthForm Component the components when inputs property are empt
           content="Submit"
           control={[Function]}
           disabled={true}
+          loading={false}
           positive={true}
         />
       </Form>

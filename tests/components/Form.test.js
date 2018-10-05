@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { Form } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import chai from 'chai';
-import AuthForm from '../../src/components/auth/AuthForm';
+import AuthForm from '../../src/components/Form';
 
 const getMounted = (options = {
   inputs: [],

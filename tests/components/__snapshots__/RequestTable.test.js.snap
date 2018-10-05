@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the RequestTable Component the content it renders should match snapshot 1`] = `
+<div
+  id="request-table"
+>
+  <Container>
+    <Table
+      as="table"
+      singleLine={true}
+    >
+      <TableHeader
+        as="thead"
+        fullWidth={true}
+      >
+        <TableRow
+          as="tr"
+          cellAs="td"
+        >
+          <TableHeaderCell
+            as="th"
+            colSpan="12"
+            textAlign="center"
+          >
+            <span
+              className="table-title"
+            >
+              YOUR REQUESTS
+              <RequestModalWithForm
+                buttonLoading={false}
+                loading={false}
+                messageTitle=""
+                success={false}
+              />
+            </span>
+          </TableHeaderCell>
+        </TableRow>
+      </TableHeader>
+      <TableBody
+        as="tbody"
+      />
+    </Table>
+  </Container>
+</div>
+`;

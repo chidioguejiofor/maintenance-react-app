@@ -1,5 +1,5 @@
 import chai from 'chai';
-import { signup, login } from '../../../src/reducers/authReducer';
+import { signup, login } from '../../src/reducers/authReducer';
 
 const initialState = {
   isLoading: false,

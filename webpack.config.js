@@ -50,11 +50,12 @@ module.exports = (env) => {
         verbose: true,
       }),
       new DefinePlugin({
-        'process.env.API_KEY': JSON.stringify(process.env.API_KEY),
-        'process.env.API_SECRET': JSON.stringify(process.env.API_SECRET),
-        'process.env.CLOUD_NAME': JSON.stringify(process.env.CLOUD_NAME),
-        'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL),
-        'process.env.FACEBOOK_ID': JSON.stringify(process.env.FACEBOOK_ID),
+        'process.env.CLOUDINARY_API_KEY': JSON
+          .stringify(process.env.CLOUDINARY_API_KEY),
+        'process.env.CLOUDINARY_API_SECRET': JSON
+          .stringify(process.env.CLOUDINARY_API_SECRET),
+        'process.env.CLOUDINARY_CLOUD_NAME': JSON
+          .stringify(process.env.CLOUDINARY_CLOUD_NAME),
       }),
     ],
   };

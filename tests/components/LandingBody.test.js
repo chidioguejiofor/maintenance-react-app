@@ -4,12 +4,12 @@ import { shallow } from 'enzyme';
 
 import LandingBody from '../../src/components/LandingBody';
 
-const buttons =[{
+const buttons = [{
   className: 'temp',
   link: 'badlink.com'
-}]
+}];
 describe('Testing LandingBody Component', () => {
   it('should match existing snapshot', () => {
-    expect(shallow(<LandingBody buttons={buttons}/>)).toMatchSnapshot();
+    expect(shallow(<LandingBody buttons={buttons} />)).toMatchSnapshot();
   });
 });

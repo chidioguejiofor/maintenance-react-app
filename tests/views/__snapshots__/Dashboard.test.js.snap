@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Dashboard Testing components rendered should match the existing snapshot of the app  1`] = `
+<div>
+  <Header />
+  <Dimmer>
+    <Loader
+      content="Loading Requests"
+    />
+  </Dimmer>
+  <RequestTable
+    buttonLoading={false}
+    currentRequest={
+      Object {
+        "description": "",
+        "image": "",
+        "location": "",
+        "title": "",
+      }
+    }
+    editedRequest={Object {}}
+    onCreateClick={[Function]}
+    onCreateRequestChange={[Function]}
+    onSubmit={[Function]}
+    onUpdateClick={[Function]}
+    requests={Array []}
+  />
+</div>
+`;
