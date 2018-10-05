@@ -1,0 +1,49 @@
+#request-table{
+    .title{
+        font-size: 20px;
+        font-weight: bold;
+        padding: 3px 0;
+        margin: 8px 0;
+
+    }
+
+    .description{
+        padding: 1px 0 ;
+        margin: 1px 0;
+    }
+
+    .table-title{
+        font-size: 28px;
+    }
+
+    .request-info{
+        padding: 7px 15px;
+    }
+
+    .create-btn{
+        position: relative;
+        left: 30%;
+    }
+    .update-btn{
+        margin-right: 13px;
+    }
+  
+    .label-update-group{
+        margin-top: 8px;
+    }
+    margin-top: 8px;
+    padding: 0  20%;
+    @media all and (max-width:715px){
+        margin-top: 0;
+        padding: 0  0;
+        .request-button{
+            position: static;
+            left: 80px;
+        }
+
+        .create-btn{
+            position: relative;
+            left: 5%;
+        }
+    }
+}

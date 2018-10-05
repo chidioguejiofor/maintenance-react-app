@@ -1,9 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Form, Input } from 'semantic-ui-react';
 import chai from 'chai';
 import ResetPassword from '../../src/views/auth/ResetPassword';
-import AuthForm from '../../src/components/auth/AuthForm';
+import Form from '../../src/components/Form';
 
 const getMounted = (options = {}) => shallow(<ResetPassword {...options} />);
 describe('Testing AuthForm Component', () => {
@@ -15,10 +14,10 @@ describe('Testing AuthForm Component', () => {
 
     it('should render an AuthForm', () => {
       const mountedObj = getMounted();
-      chai.expect(mountedObj.find(AuthForm).length)
+      chai.expect(mountedObj.find(Form).length)
         .to.equal(1);
       chai.expect(
-        mountedObj.find(AuthForm)
+        mountedObj.find(Form)
           .prop('inputs')
           .length
       )

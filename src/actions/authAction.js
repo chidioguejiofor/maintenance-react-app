@@ -10,7 +10,14 @@ export const signUp = user => ({
 export const login = user => ({
   type: types.LOGIN,
   payload: axiosInstance()
-    .post('/auth/login', user)
+    .post('/auth/login', { ...user, userType: 'client' })
+});
+
+
+export const engineerLogin = engineer => ({
+  type: types.ENGINEER_LOGIN,
+  payload: axiosInstance()
+    .post('/auth/login', { ...engineer, userType: 'engineer' })
 });
 
 export const resetPassword = () => ({

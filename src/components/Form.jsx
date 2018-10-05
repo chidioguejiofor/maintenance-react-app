@@ -1,18 +1,17 @@
-import { Form, Container, Header, Icon, Message } from 'semantic-ui-react';
+import { Form, Container, Header, Icon,
+  Message, Image } from 'semantic-ui-react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import TopNav from '../Header';
 
 const AuthForm = ({
-  formType, handleSubmit, success, messageTitle,
+  formTitle, handleSubmit, success, messageTitle,
   loading, handleChange, inputs, errorMessages,
-  links
+  links, type, iconUrl, submitLoading,
 }) => (
   <div id="auth-form">
-    <TopNav />
     <Container>
-      <div className="form">
+      <div className={type}>
         <Form
           loading={loading}
           onSubmit={handleSubmit}
@@ -21,10 +20,13 @@ const AuthForm = ({
         >
 
           <Header as="h2" icon textAlign="center">
-            <Icon name="user circle" />
-            <Header.Content>{formType}</Header.Content>
+            {iconUrl ? null : <Icon name="user circle" />}
+            <Header.Content>{formTitle}</Header.Content>
           </Header>
+          {iconUrl ? <Image size="medium" centered src={iconUrl} /> : null}
+
           <Message
+            className={success ? 'text-centered' : ''}
             header={messageTitle}
             error={!!errorMessages.length}
             success={success}
@@ -40,12 +42,14 @@ const AuthForm = ({
               value={input.value}
               onChange={handleChange}
               type={input.type}
+              src={input.src}
             />
           ))}
           <Form.Button
-            disabled={success}
+            disabled={success || submitLoading}
             positive
             content="Submit"
+            loading={submitLoading}
           />
           {links.map((linkObj, index) => (
             <span key={index} className="link">
@@ -66,19 +70,25 @@ AuthForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
   inputs: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-  formType: PropTypes.string,
+  formTitle: PropTypes.string,
   errorMessages: PropTypes.arrayOf(PropTypes.string),
   success: PropTypes.bool,
   messageTitle: PropTypes.string,
   loading: PropTypes.bool,
   links: PropTypes.arrayOf(PropTypes.object),
+  type: PropTypes.string,
+  iconUrl: PropTypes.string,
+  submitLoading: PropTypes.bool,
 };
 AuthForm.defaultProps = {
-  formType: 'Sign Up',
+  formTitle: 'Sign Up',
   errorMessages: [],
   success: true,
   messageTitle: '',
   loading: false,
   links: [],
+  type: 'auth',
+  iconUrl: '',
+  submitLoading: false,
 };
 export default AuthForm;

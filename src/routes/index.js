@@ -4,7 +4,7 @@ import Signup from '../views/auth/Signup';
 import Login from '../views/auth/Login';
 import ResetPassword from '../views/auth/ResetPassword';
 import Dashboard from '../views/dashboard/Dashboard';
-
+import ProtectedRoute from './ProtectedRoute';
 
 export default [
   {
@@ -32,10 +32,12 @@ export default [
     exact: true,
   },
 
+
   {
-    type: Route,
+    type: ProtectedRoute,
     routePath: '/dashboard',
     component: Dashboard,
     exact: true,
   },
+
 ];

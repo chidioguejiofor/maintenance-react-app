@@ -6,12 +6,13 @@ const Main = () => (
   <main>
     <Switch>
       {
-        routes.map((route, index) => (<route.type
-          key={index}
-          exact={route.exact}
-          path={route.routePath}
-          component={route.component}
-        />
+        routes.map((routeObj, index) => (
+          <routeObj.type
+            key={index}
+            exact={routeObj.exact}
+            path={routeObj.routePath}
+            component={routeObj.component}
+          />
         ))
       }
     </Switch>

@@ -1,8 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import chai from 'chai';
-import { SignUp, mapStateToProps, mapDispatchToProps } from '../../src/views/auth/Signup';
-import AuthForm from '../../src/components/auth/AuthForm';
+import { SignUp, mapStateToProps,
+  mapDispatchToProps } from '../../src/views/auth/Signup';
+import AuthForm from '../../src/components/Form';
 
 const resetPageSpy = jest.fn();
 const getMounted = (options = {
