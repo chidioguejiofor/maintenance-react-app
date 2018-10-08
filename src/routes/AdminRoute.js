@@ -1,19 +1,18 @@
 
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import ProtectedRoute from './ProtectedRoute';
+import { Redirect, Route } from 'react-router-dom';
 
 /**
  *this checks if the logged in user is the admin
  * @returns {boolean} true when the logged in user is an admin
  */
-export const isAdmin = () => localStorage.admin;
+export const isAdmin = () => !!(localStorage.admin && localStorage.token);
 
 const AdminRoute = ({ component: Component, ...rest }) => (
-  <ProtectedRoute
+  <Route
     {...rest}
-    render={props => (isAdmin()
-      ? <Component {...props} /> : <Redirect to="/" />)}
+    render={props => (isAdmin() ? (<Component {...props} />)
+      : (<Redirect to="/" />))}
   />
 );
 
