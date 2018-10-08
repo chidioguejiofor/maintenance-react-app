@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Form from '../../components/Form';
-import { login as loginAction } from '../../actions/authAction';
+import { login as loginAction, engineerLogin as
+engineerLoginAction } from '../../actions/authAction';
 import Header from '../../components/Header';
 /**
  *contains logic for the LoginPage.
@@ -19,7 +20,9 @@ export class Login extends Component {
       username: '',
       password: '',
     };
+    const { match: { path } } = props;
 
+    this.admin = path === '/admin/login';
     // bind methods
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,9 +37,11 @@ export class Login extends Component {
   componentWillReceiveProps(newProps) {
     const { history } = this.props;
 
+    const dashboardPath = `/dashboard${this.admin ? '/admin' : ''}`;
+
     if (newProps.login.success) {
-      setTimeout(() => {
-        history.push('/dashboard');
+      return setTimeout(() => {
+        history.push(dashboardPath);
       }, 1500);
     }
   }
@@ -59,7 +64,13 @@ export class Login extends Component {
    */
   handleSubmit() {
     const { username, password } = this.state;
-    const { sendLoginRequest } = this.props;
+    const { sendLoginRequest,
+      sendEngineerLoginRequest } = this.props;
+
+    if (this.admin) {
+      return sendEngineerLoginRequest({
+        username, password, userType: 'engineer' });
+    }
     sendLoginRequest({ username, password, userType: 'client' });
   }
 
@@ -119,6 +130,7 @@ export const mapStateToProps = ({ login }) => ({
 
 export const mapDispatchToProps = dispatch => ({
   sendLoginRequest: user => dispatch(loginAction(user)),
+  sendEngineerLoginRequest: engineer => dispatch(engineerLoginAction(engineer)),
 });
 
 

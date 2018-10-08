@@ -3,13 +3,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import RequestModalWithForm from './RequestModalWithForm';
 import ModalWithRequest from './ModalWithRequest';
+import AdminButtons from './AdminButtons';
 import { getColor, getIconType,
   capitalizeWord } from '../../helpers/requestHelper';
+
 
 const RequestTable = ({
   onCreateRequestChange, requests, onSubmit, currentRequest,
   onUpdateClick, onCreateClick, buttonLoading, editedRequest,
-  openModals,
+  openModals, admin
 }) => (
   <div id="request-table">
     <Container>
@@ -58,7 +60,7 @@ const RequestTable = ({
                   <div className="label-update-group">
 
                     <ModalWithRequest {...request} />
-                    {request.status === 'pending' ? (
+                    {!admin && request.status === 'pending' ? (
                       <RequestModalWithForm
                         {...currentRequest}
                         onSubmit={() => onSubmit('update')}
@@ -74,7 +76,14 @@ const RequestTable = ({
                       />
                     ) : null}
 
-                    <Label size="large">
+                    {admin ? (
+                      <AdminButtons
+                        status={request.status}
+                        onClick={onSubmit}
+                        requestId={request.id}
+                      />
+                    ) : ''}
+                    <Label size="large" basic>
                       <Icon
                         name={getIconType(request.status)}
                         color={getColor(request.status)}
