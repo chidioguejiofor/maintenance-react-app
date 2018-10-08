@@ -1,11 +1,8 @@
-
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-
+import routesHelper from '../helpers/routesHelper';
 
 /**
  *this checks if the user is logged in by checking for token in localStorage
- * @returns {boolean} true when user is loggedin
+ * @returns {boolean} true when user is logged in
  */
 export const userLoggedIn = () => {
   if (typeof localStorage.token === 'string'
@@ -15,13 +12,9 @@ export const userLoggedIn = () => {
   return false;
 };
 
-const ProtectedRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => (userLoggedIn()
-      ? <Component {...props} /> : <Redirect to="/login" />)}
-  />
-);
+
+const ProtectedRoute = ({ component: Component,
+  ...rest }) => routesHelper(userLoggedIn(), Component, rest, '/login');
 
 
 export default ProtectedRoute;

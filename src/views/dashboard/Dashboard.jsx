@@ -5,8 +5,8 @@ import { Dimmer, Loader } from 'semantic-ui-react';
 import RequestTable from '../../components/requests/RequestTable';
 import Header from '../../components/Header';
 import uploadImageAction from '../../actions/uploadImageAction';
-import { createRequest, updateRequest,
-  getAllRequest } from '../../actions/requestAction';
+import { createRequest, updateRequest, engineerUpdateRequest,
+  getUserRequests, getAllRequests } from '../../actions/requestAction';
 /**
  *this represents the Dashboard for both the admin and the
   regular users
@@ -18,15 +18,18 @@ export class Dashboard extends Component {
    */
   constructor(props) {
     super(props);
-    const { sendUploadImageRequest } = props;
+    const { sendUploadImageRequest, match: { path } } = props;
     this.state = {
       title: '',
       location: '',
       image: '',
       description: '',
       allowModalToOpen: undefined,
-      requests: []
+      requests: [],
+
     };
+    this.admin = path === '/dashboard/admin';
+
 
     this.fileReader = new FileReader();
     this.fileReader.addEventListener('load', () => {
@@ -47,8 +50,10 @@ export class Dashboard extends Component {
    @returns {void} performs an action and returns nothing
    */
   componentDidMount() {
-    const { sendLoadAllRequest } = this.props;
-    sendLoadAllRequest();
+    const { sendLoadUserRequest,
+      sendLoadAllRequests } = this.props;
+    if (this.admin) return sendLoadAllRequests();
+    return sendLoadUserRequest();
   }
 
   /**
@@ -59,7 +64,7 @@ export class Dashboard extends Component {
    @param {object} newProps this contains the new props
    */
   componentWillReceiveProps(newProps) {
-    const { sendLoadAllRequest } = this.props;
+    const { sendLoadUserRequest, sendLoadAllRequests } = this.props;
 
     if (newProps.loadedRequest.requests) {
       this.setState({
@@ -75,7 +80,8 @@ export class Dashboard extends Component {
     if (newProps.currentRequest.success) {
       setTimeout(() => {
         this.setState({ allowModalToOpen: false });
-        sendLoadAllRequest();
+        if (this.admin) return sendLoadAllRequests();
+        return sendLoadUserRequest();
       }, 1500);
     }
   }
@@ -96,17 +102,27 @@ export class Dashboard extends Component {
   /**
    * this creates a new request
    * @param {object} type a string that contains the the request type
-   * @param {object} param1 contains the attributes f the component
+   * @param {object} requestId contains the id of the request to be updated
    * @returns {void} performs an action and nothing
    */
-  persistRequest(type) {
-    const { sendCreateRequest, sendUpdateRequest } = this.props;
+  persistRequest(type, requestId) {
+    const { sendCreateRequest,
+      sendUpdateRequest, sendEngineerUpdate } = this.props;
 
     const { title, description, location, image, id } = this.state;
-    if (type === 'update') {
+    switch (type) {
+    case 'update': {
       return sendUpdateRequest({ id, title, description, location, image });
     }
-    sendCreateRequest({ title, description, location, image });
+    case 'create': {
+      return sendCreateRequest({ title, description, location, image });
+    }
+    default: {
+      if (this.admin) {
+        return sendEngineerUpdate(type, requestId);
+      }
+    }
+    }
   }
 
 
@@ -154,7 +170,7 @@ export class Dashboard extends Component {
       <div>
         <Header />
 
-        <Dimmer active={loadedRequest.isLoading}>
+        <Dimmer active={!this.admin && loadedRequest.isLoading}>
           <Loader content="Loading Requests" />
 
         </Dimmer>
@@ -168,6 +184,7 @@ export class Dashboard extends Component {
           buttonLoading={storeImage.isLoading}
           onSubmit={this.persistRequest}
           openModals={allowModalToOpen}
+          admin={this.admin}
         />
 
 
@@ -179,20 +196,24 @@ export class Dashboard extends Component {
 Dashboard.propTypes = {
   sendCreateRequest: PropTypes.func,
   sendUploadImageRequest: PropTypes.func,
-  sendLoadAllRequest: PropTypes.func,
+  sendLoadUserRequest: PropTypes.func,
   sendUpdateRequest: PropTypes.func,
   image: PropTypes.objectOf(PropTypes.any),
   currentRequest: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool])
   ),
   loadedRequest: PropTypes.objectOf(PropTypes.any),
+  sendLoadAllRequests: PropTypes.func,
+  match: PropTypes.objectOf(PropTypes.any).isRequired,
+  sendEngineerUpdate: PropTypes.func.isRequired,
 };
 
 Dashboard.defaultProps = {
   sendCreateRequest: () => {},
   sendUploadImageRequest: () => {},
-  sendLoadAllRequest: () => {},
+  sendLoadUserRequest: () => {},
   sendUpdateRequest: () => {},
+  sendLoadAllRequests: () => {},
   image: '',
   currentRequest: {},
   loadedRequest: false,
@@ -208,9 +229,11 @@ export const mapStateToProps = ({ image, loadedRequest, currentRequest }) => ({
 export const mapDispatchToProps = dispatch => ({
   sendUploadImageRequest: imageUrl => dispatch(uploadImageAction(imageUrl)),
   sendCreateRequest: request => dispatch(createRequest(request)),
-  sendLoadAllRequest: () => dispatch(getAllRequest()),
+  sendLoadUserRequest: () => dispatch(getUserRequests()),
+  sendLoadAllRequests: () => dispatch(getAllRequests()),
   sendUpdateRequest: request => dispatch(updateRequest(request)),
   resetCurrentRequest: () => dispatch({ type: 'REQUEST_RESET' }),
+  sendEngineerUpdate: (type, id) => dispatch(engineerUpdateRequest(type, id))
 
 });
 

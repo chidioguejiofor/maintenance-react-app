@@ -9,6 +9,7 @@ exports[`Testing Dashboard Testing components rendered should match the existing
     />
   </Dimmer>
   <RequestTable
+    admin={false}
     buttonLoading={false}
     currentRequest={
       Object {

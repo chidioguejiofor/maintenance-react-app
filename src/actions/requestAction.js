@@ -11,7 +11,19 @@ export const updateRequest = request => ({
   payload: axiosInstance().put(`/users/requests/${request.id}`, request)
 });
 
-export const getAllRequest = () => ({
+
+export const getUserRequests = () => ({
   type: types.LOAD_REQUEST,
   payload: axiosInstance().get('/users/requests/')
+});
+
+export const engineerUpdateRequest = (type, requestId) => ({
+  type: types.ENGINEER_UPDATE_REQUEST,
+  payload: axiosInstance()
+    .put(`/requests/${requestId}/${type.toLowerCase()}`)
+});
+
+export const getAllRequests = () => ({
+  type: types.ENGINEER_LOAD_REQUEST,
+  payload: axiosInstance().get('/requests')
 });

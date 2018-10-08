@@ -54,12 +54,14 @@ export const signup = (state = initialState, action = {}) => {
 
 export const login = (state = initialState, action = {}) => {
   switch (action.type) {
+  case `${types.ENGINEER_LOGIN}_RESET`:
   case `${types.LOGIN}_RESET`:
     return {
       ...state,
       ...initialState
     };
 
+  case `${types.ENGINEER_LOGIN}_LOADING`:
   case `${types.LOGIN}_LOADING`:
     return {
       ...state,
@@ -68,6 +70,7 @@ export const login = (state = initialState, action = {}) => {
       errors: {},
     };
 
+  case `${types.ENGINEER_LOGIN}_SUCCESS`:
   case `${types.LOGIN}_SUCCESS`: {
     const { data } = action.payload;
     return {
@@ -79,7 +82,7 @@ export const login = (state = initialState, action = {}) => {
     };
   }
 
-
+  case `${types.ENGINEER_LOGIN}_FAILURE`:
   case `${types.LOGIN}_FAILURE`: {
     const errors = action.payload;
     return {

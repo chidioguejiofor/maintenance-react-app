@@ -40,4 +40,34 @@ describe('Testing errorMiddleware', () => {
     chai.expect(mockUser.email)
       .to.equal(localStorage.email);
   });
+
+  it('should store the admin informatinos and value admin ===true in the localStorage when the user is engineer', () => {
+    const mockUser = {
+      username: 'adminUsername',
+      email: 'exapleadminmail@gmail.com',
+      token: 'mockAdminToken'
+    };
+    const mockAction = {
+      type: 'ENGINEER_LOGIN_SUCCESS',
+      payload: {
+        data: {
+          data: mockUser
+        }
+      }
+    };
+
+    global.localStorage.token = '';
+    global.localStorage.admin = false;
+    const action = loginSuccessMiddleware()(next)(mockAction);
+    chai.expect(action)
+      .to.eql(mockAction);
+    chai.expect(mockUser.token)
+      .to.equal(localStorage.token);
+    chai.expect(mockUser.username)
+      .to.equal(localStorage.username);
+    chai.expect(mockUser.email)
+      .to.equal(localStorage.email);
+    chai.expect(localStorage.admin)
+      .to.equal('true');
+  });
 });
