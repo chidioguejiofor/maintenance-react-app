@@ -3,62 +3,37 @@ import { Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { getColor } from '../../helpers/requestHelper';
 
-const AdminButtons = ({ status, onClick, requestId }) => {
-  if (status === 'pending') {
-    return (
-      <span>
-        <Button
-          content="Approve"
-          onClick={() => onClick('approve', requestId)}
-          color={getColor('approved')}
-          size="small"
-        />
-        <Button
-          content="Disapprove"
-          onClick={() => onClick('disapprove', requestId)}
-          color={getColor('disapproved')}
-          size="small"
-        />
-      </span>
+const createButton = (content, onClick, requestId) => (
+  <Button
+    content={content}
+    onClick={() => onClick(content.toLowerCase(), requestId)}
+    color={getColor(`${content.toLowerCase()}d`)}
+    size="small"
+  />
+);
+const getButtonsArr = (status, onClick, requestId) => {
+  const arr = [];
 
-    );
-  }
-
-  if (status === 'disapproved') {
-    return (
-      <span>
-        <Button
-          content="Approve"
-          onClick={() => onClick('approve', requestId)}
-          color={getColor('approved')}
-          size="small"
-        />
-      </span>
-
-    );
+  if (status === 'pending' || status === 'disapproved') {
+    arr.push(createButton('Approve', onClick, requestId));
   }
   if (status === 'approved') {
-    return (
-      <span>
-        <Button
-          content="Resolve"
-          onClick={() => onClick('resolve', requestId)}
-          color={getColor('resolved')}
-          size="small"
-        />
-        <Button
-          content="Disapprove"
-          onClick={() => onClick('disapprove', requestId)}
-          color={getColor('disapproved')}
-          size="small"
-        />
-      </span>
-
-    );
+    arr.push(createButton('Resolve', onClick, requestId));
+  }
+  if (status === 'pending' || status === 'approved') {
+    arr.push(createButton('Disapprove', onClick, requestId));
   }
 
-  return '';
+  return arr;
 };
+
+const AdminButtons = ({ status, onClick, requestId }) => (
+  <span>
+    {getButtonsArr(status, onClick, requestId)
+      .map(elements => elements)}
+
+  </span>
+);
 
 AdminButtons.propTypes = {
   status: PropTypes.bool.isRequired,

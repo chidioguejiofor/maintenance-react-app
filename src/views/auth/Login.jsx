@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Form from '../../components/Form';
-import { login as loginAction, engineerLogin as
-engineerLoginAction } from '../../actions/authAction';
+import { login as loginAction,
+  engineerLogin as engineerLoginAction } from '../../actions/authAction';
 import Header from '../../components/Header';
 /**
  *contains logic for the LoginPage.
@@ -94,9 +94,9 @@ export class Login extends Component {
         type: 'password'
       }
     ];
-    const links = [
-      { caption: 'Sign Up', to: '/signup' },
-    ];
+    const links = [];
+    if (!this.admin) links.push({ caption: 'Sign Up', to: '/signup' });
+
     return (
       <div>
         <Header />
