@@ -5,7 +5,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 /**
  *this checks if the user is logged in by checking for token in localStorage
- * @returns {boolean} true when user is loggedin
+ * @returns {boolean} true when user is logged in
  */
 export const userLoggedIn = () => {
   if (typeof localStorage.token === 'string'

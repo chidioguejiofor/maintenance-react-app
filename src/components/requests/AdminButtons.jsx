@@ -23,6 +23,20 @@ const AdminButtons = ({ status, onClick, requestId }) => {
 
     );
   }
+
+  if (status === 'disapproved') {
+    return (
+      <span>
+        <Button
+          content="Approve"
+          onClick={() => onClick('approve', requestId)}
+          color={getColor('approved')}
+          size="small"
+        />
+      </span>
+
+    );
+  }
   if (status === 'approved') {
     return (
       <span>
@@ -33,8 +47,8 @@ const AdminButtons = ({ status, onClick, requestId }) => {
           size="small"
         />
         <Button
-          content="Cancel"
-          onClick={() => onClick('cancel', requestId)}
+          content="Disapprove"
+          onClick={() => onClick('disapprove', requestId)}
           color={getColor('disapproved')}
           size="small"
         />
@@ -43,16 +57,7 @@ const AdminButtons = ({ status, onClick, requestId }) => {
     );
   }
 
-  return (
-    <span>
-      <Button
-        content="Re-open"
-        onClick={() => onClick('reopen', requestId)}
-        color="brown"
-        size="small"
-      />
-    </span>
-  );
+  return '';
 };
 
 AdminButtons.propTypes = {
