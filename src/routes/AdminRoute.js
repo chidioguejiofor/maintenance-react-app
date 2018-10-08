@@ -13,7 +13,7 @@ const AdminRoute = ({ component: Component, ...rest }) => (
   <ProtectedRoute
     {...rest}
     render={props => (isAdmin()
-      ? <Component {...props} /> : <Redirect to="/admin/login" />)}
+      ? <Component {...props} /> : <Redirect to="/" />)}
   />
 );
 
