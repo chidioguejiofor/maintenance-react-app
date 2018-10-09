@@ -5,7 +5,7 @@ import { Dimmer, Loader } from 'semantic-ui-react';
 import RequestTable from '../../components/requests/RequestTable';
 import Header from '../../components/Header';
 import uploadImageAction from '../../actions/uploadImageAction';
-import { createRequest, updateRequest, engineerUpdateRequest,
+import { createRequest, updateRequest,
   getUserRequests, getAllRequests } from '../../actions/requestAction';
 /**
  *this represents the Dashboard for both the admin and the
@@ -64,7 +64,7 @@ export class Dashboard extends Component {
    @param {object} newProps this contains the new props
    */
   componentWillReceiveProps(newProps) {
-    const { sendLoadUserRequest, sendLoadAllRequests } = this.props;
+    const { sendLoadUserRequest } = this.props;
 
     if (newProps.loadedRequest.requests) {
       this.setState({
@@ -80,8 +80,7 @@ export class Dashboard extends Component {
     if (newProps.currentRequest.success) {
       setTimeout(() => {
         this.setState({ allowModalToOpen: false });
-        if (this.admin) return sendLoadAllRequests();
-        return sendLoadUserRequest();
+        sendLoadUserRequest();
       }, 1500);
     }
   }
@@ -102,27 +101,17 @@ export class Dashboard extends Component {
   /**
    * this creates a new request
    * @param {object} type a string that contains the the request type
-   * @param {object} requestId contains the id of the request to be updated
+   * @param {object} param1 contains the attributes f the component
    * @returns {void} performs an action and nothing
    */
-  persistRequest(type, requestId) {
-    const { sendCreateRequest,
-      sendUpdateRequest, sendEngineerUpdate } = this.props;
+  persistRequest(type) {
+    const { sendCreateRequest, sendUpdateRequest } = this.props;
 
     const { title, description, location, image, id } = this.state;
-    switch (type) {
-    case 'update': {
+    if (type === 'update') {
       return sendUpdateRequest({ id, title, description, location, image });
     }
-    case 'create': {
-      return sendCreateRequest({ title, description, location, image });
-    }
-    default: {
-      if (this.admin) {
-        return sendEngineerUpdate(type, requestId);
-      }
-    }
-    }
+    sendCreateRequest({ title, description, location, image });
   }
 
 
@@ -170,7 +159,7 @@ export class Dashboard extends Component {
       <div>
         <Header />
 
-        <Dimmer active={!this.admin && loadedRequest.isLoading}>
+        <Dimmer active={loadedRequest.isLoading}>
           <Loader content="Loading Requests" />
 
         </Dimmer>
@@ -204,8 +193,6 @@ Dashboard.propTypes = {
   ),
   loadedRequest: PropTypes.objectOf(PropTypes.any),
   sendLoadAllRequests: PropTypes.func,
-  match: PropTypes.objectOf(PropTypes.any).isRequired,
-  sendEngineerUpdate: PropTypes.func.isRequired,
 };
 
 Dashboard.defaultProps = {
@@ -233,7 +220,6 @@ export const mapDispatchToProps = dispatch => ({
   sendLoadAllRequests: () => dispatch(getAllRequests()),
   sendUpdateRequest: request => dispatch(updateRequest(request)),
   resetCurrentRequest: () => dispatch({ type: 'REQUEST_RESET' }),
-  sendEngineerUpdate: (type, id) => dispatch(engineerUpdateRequest(type, id))
 
 });
 

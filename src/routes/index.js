@@ -47,7 +47,7 @@ export default [
     exact: true,
   },
   {
-    type: AdminRoute,
+    type: Route,
     routePath: '/dashboard/admin',
     component: Dashboard,
     exact: true,

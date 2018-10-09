@@ -6,8 +6,7 @@ import { Dashboard, mapDispatchToProps, mapStateToProps }
   from '../../src/views/dashboard/Dashboard';
 
 const basicProps = {
-  sendLoadUserRequest: () => {},
-  match: { path: '/dashboard' }
+  sendLoadAllRequest: () => {}
 };
 const getShallowObj = (props = {}) => shallow(
   <Dashboard {...basicProps} {...props} />
@@ -16,7 +15,7 @@ const getShallowObj = (props = {}) => shallow(
 describe('Testing Dashboard', () => {
   describe('Testing components rendered', () => {
     it('should match the existing snapshot of the app ', () => {
-      const wrapper = getShallowObj();
+      const wrapper = shallow(<Dashboard />);
       expect(wrapper).toMatchSnapshot();
     });
   });
@@ -31,6 +30,7 @@ describe('Testing Dashboard', () => {
 
       const newState = mapStateToProps(mockState);
 
+      console.log(newState);
       chai.expect(newState.image)
         .to.equal(mockState.image);
 
@@ -51,42 +51,28 @@ describe('Testing Dashboard', () => {
         .to.be.a('function');
       chai.expect(newProps.sendCreateRequest)
         .to.be.a('function');
-      chai.expect(newProps.sendLoadUserRequest)
+      chai.expect(newProps.sendLoadAllRequest)
         .to.be.a('function');
       chai.expect(newProps.sendUpdateRequest)
         .to.be.a('function');
       chai.expect(newProps.resetCurrentRequest)
         .to.be.a('function');
-      chai.expect(newProps.sendLoadAllRequests)
-        .to.be.a('function');
-      chai.expect(newProps.sendEngineerUpdate)
-        .to.be.a('function');
 
-      newProps.sendEngineerUpdate('', '');
-      newProps.sendLoadAllRequests();
+
       newProps.sendCreateRequest();
-      newProps.sendLoadUserRequest();
+      newProps.sendLoadAllRequest();
       newProps.sendUpdateRequest({ id: 1 });
       newProps.resetCurrentRequest();
       expect(mockDispatch)
-        .toHaveBeenCalledTimes(6);
+        .toHaveBeenCalledTimes(4);
     });
   });
   describe('component methods', () => {
     describe('componentDidMount', () => {
-      it('should call componentDidMount on load and sendLoadUserRequest when the route is /dashboard', () => {
+      it('should call componentDidMount on load ', () => {
         const loadSpy = jest.fn();
         const spy = jest.spyOn(Dashboard.prototype, 'componentDidMount');
-        getShallowObj({ sendLoadUserRequest: loadSpy });
-        expect(loadSpy)
-          .toHaveBeenCalled();
-        expect(spy)
-          .toHaveBeenCalled();
-      });
-      it('should call componentDidMount on load  and sendLoadUserRequest when the route is /dashboard/admin', () => {
-        const loadSpy = jest.fn();
-        const spy = jest.spyOn(Dashboard.prototype, 'componentDidMount');
-        getShallowObj({ sendLoadAllRequests: loadSpy, match: { path: '/dashboard/admin' } });
+        getShallowObj({ sendLoadAllRequest: loadSpy });
         expect(loadSpy)
           .toHaveBeenCalled();
         expect(spy)
@@ -126,7 +112,7 @@ describe('Testing Dashboard', () => {
         const mockRequest = mockRequests[0];
 
         shallowObj.setState(...mockRequest);
-        shallowObj.instance().persistRequest('create');
+        shallowObj.instance().persistRequest();
         expect(spy).toHaveBeenCalled();
       });
       it('should call sendCreateRequest method with the request when its argument does not equal "update"', () => {
@@ -138,18 +124,6 @@ describe('Testing Dashboard', () => {
 
         shallowObj.setState(...mockRequest);
         shallowObj.instance().persistRequest('update');
-        expect(spy).toHaveBeenCalled();
-      });
-      it('should call sendEngineerUpdate method with the request when its argument is unknown and user is admin', () => {
-        const spy = jest.fn();
-        const shallowObj = getShallowObj({
-          sendEngineerUpdate: spy,
-          match: { path: '/dashboard/admin' }
-        });
-        const mockRequest = mockRequests[0];
-
-        shallowObj.setState(...mockRequest);
-        shallowObj.instance().persistRequest();
         expect(spy).toHaveBeenCalled();
       });
     });
@@ -216,7 +190,7 @@ describe('Testing Dashboard', () => {
       it('should be called when props is set', () => {
         const loadSpy = jest.fn();
         const componentWillReceivePropsSpy = jest.spyOn(Dashboard.prototype, 'componentWillReceiveProps');
-        const shallowObj = getShallowObj({ sendLoadUserRequest: loadSpy });
+        const shallowObj = getShallowObj({ sendLoadAllRequest: loadSpy });
         shallowObj.setProps({ unknown: 'unknown' });
         expect(componentWillReceivePropsSpy)
           .toHaveBeenCalled();
@@ -276,28 +250,6 @@ describe('Testing Dashboard', () => {
         expect(setStateSpy)
           .toHaveBeenCalled();
         jest.runAllTimers();
-        chai.expect(shallowObj.state().allowModalToOpen)
-          .to.equal(false);
-      });
-
-      it('should set call sendLoadAllRequests when currentRequest equals success and  path is /dashboard/admin', () => {
-        const componentWillReceivePropsSpy = jest.spyOn(Dashboard.prototype, 'componentWillReceiveProps');
-
-        const spy = jest.fn();
-        jest.useFakeTimers();
-        const sampleLoadedRequest = {
-          currentRequest: { success: true },
-
-        };
-        const shallowObj = getShallowObj({ sendLoadAllRequests: spy, match: { path: '/dashboard/admin' } });
-        shallowObj.setProps(sampleLoadedRequest);
-
-        expect(componentWillReceivePropsSpy)
-          .toHaveBeenCalled();
-
-        jest.runAllTimers();
-        expect(spy)
-          .toHaveBeenCalled();
         chai.expect(shallowObj.state().allowModalToOpen)
           .to.equal(false);
       });

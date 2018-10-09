@@ -15,8 +15,6 @@ export const requestReducer = (state = initialPersistState, action = {}) => {
       ...initialPersistState,
     };
 
-
-  case `${types.ENGINEER_UPDATE_REQUEST}_LOADING`:
   case `${types.CREATE_REQUEST}_LOADING`:
   case `${types.UPDATE_REQUEST}_LOADING`:
   {
@@ -28,7 +26,6 @@ export const requestReducer = (state = initialPersistState, action = {}) => {
     };
   }
 
-  case `${types.ENGINEER_UPDATE_REQUEST}_SUCCESS`:
   case `${types.CREATE_REQUEST}_SUCCESS`:
   case `${types.UPDATE_REQUEST}_SUCCESS`:
   {
@@ -43,7 +40,6 @@ export const requestReducer = (state = initialPersistState, action = {}) => {
     };
   }
 
-  case `${types.ENGINEER_UPDATE_REQUEST}_FAILURE`:
   case `${types.CREATE_REQUEST}_FAILURE`:
   case `${types.UPDATE_REQUEST}_FAILURE`: {
     const errors = action.payload;
