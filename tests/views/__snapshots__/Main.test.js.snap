@@ -25,25 +25,13 @@ exports[`Testing LandingBody Component should match existing snapshot 1`] = `
       component={[Function]}
       exact={true}
       key="3"
-      path="/admin/login"
-    />
-    <Route
-      component={[Function]}
-      exact={true}
-      key="4"
       path="/reset-password"
     />
     <ProtectedRoute
       component={[Function]}
       exact={true}
-      key="5"
+      key="4"
       path="/dashboard"
-    />
-    <AdminRoute
-      component={[Function]}
-      exact={true}
-      key="6"
-      path="/dashboard/admin"
     />
   </Switch>
 </main>

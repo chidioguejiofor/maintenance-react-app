@@ -5,18 +5,13 @@ import { Login, mapStateToProps,
   mapDispatchToProps } from '../../src/views/auth/Login';
 import AuthForm from '../../src/components/Form';
 
-const baseOption = {
+const getMounted = (options = {
   login: {
     errors: { errorMessages: [] },
   },
   history: { push: () => {} },
-
-  match: { path: '/login' }
-};
-const getMounted = (options = {}) => shallow(<Login
-  {...baseOption}
-  {...options}
-/>);
+  sendLoginRequest: () => {}
+}) => shallow(<Login {...options} />);
 describe('Testing Login Component', () => {
   describe('the components when inputs property are empty rendered in the DOM', () => {
     it('should match snapshot', () => {
@@ -58,12 +53,9 @@ describe('Testing Login Component', () => {
 
       chai.expect(mockedProp.sendLoginRequest)
         .to.be.a('function');
-      chai.expect(mockedProp.sendEngineerLoginRequest)
-        .to.be.a('function');
       mockedProp.sendLoginRequest();
-      mockedProp.sendEngineerLoginRequest();
       expect(mockDispatch)
-        .toHaveBeenCalledTimes(2);
+        .toHaveBeenCalledTimes(1);
     });
   });
   describe('the methods in the component', () => {
@@ -102,34 +94,6 @@ describe('Testing Login Component', () => {
         jest.runAllTimers();
         expect(historySpy).toHaveBeenNthCalledWith(1, '/dashboard');
       });
-
-      it('should call history.push with /dashboard/admin when user is admin', () => {
-        const spy = jest.spyOn(Login.prototype, 'componentWillReceiveProps');
-        const historySpy = jest.fn();
-        jest.useFakeTimers();
-        const newProps = {
-          login: {
-            errors: { errorMessages: [] },
-            success: true
-          },
-          history: { push: historySpy },
-        };
-        const options = {
-          login: {
-            errors: { errorMessages: [] },
-          },
-          history: { push: historySpy },
-          match: { path: '/admin/login' }
-        };
-        const mountedObj = getMounted(options);
-
-        mountedObj.setProps(newProps);
-        expect(spy)
-          .toHaveBeenCalledTimes(3);
-        expect(setTimeout).toHaveBeenCalledTimes(1);
-        jest.runAllTimers();
-        expect(historySpy).toHaveBeenNthCalledWith(1, '/dashboard/admin');
-      });
     });
     describe('handleChange', () => {
       it('should update state when called', () => {
@@ -149,7 +113,7 @@ describe('Testing Login Component', () => {
     describe('handleSubmit', () => {
       it('should call send login request with the an object', () => {
         const sendLoginSpy = jest.fn();
-
+        const spy = jest.spyOn(Login.prototype, 'handleChange');
         const mountedObj = getMounted({
           login: {
             errors: { errorMessages: [] },
@@ -160,22 +124,7 @@ describe('Testing Login Component', () => {
         mountedObj.instance().handleSubmit();
         expect(sendLoginSpy)
           .toHaveBeenCalledTimes(1);
-      });
-
-      it('should call sendEngineerLoginRequest when the logged in user is an admin', () => {
-        const sendEngineerLoginRequestSpy = jest.fn();
-
-        const mountedObj = getMounted({
-          login: {
-            errors: { errorMessages: [] },
-          },
-          sendEngineerLoginRequest: sendEngineerLoginRequestSpy,
-          match: { path: '/admin/login' }
-
-        });
-
-        mountedObj.instance().handleSubmit();
-        expect(sendEngineerLoginRequestSpy)
+        expect(spy)
           .toHaveBeenCalledTimes(1);
       });
     });

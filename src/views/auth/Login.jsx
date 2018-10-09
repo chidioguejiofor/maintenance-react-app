@@ -120,9 +120,7 @@ export class Login extends Component {
 Login.propTypes = {
   sendLoginRequest: PropTypes.func.isRequired,
   login: PropTypes.objectOf(PropTypes.any).isRequired,
-  history: PropTypes.objectOf(PropTypes.any).isRequired,
-  sendEngineerLoginRequest: PropTypes.func.isRequired,
-  match: PropTypes.objectOf(PropTypes.any).isRequired,
+  history: PropTypes.objectOf(PropTypes.any).isRequired
 };
 
 
