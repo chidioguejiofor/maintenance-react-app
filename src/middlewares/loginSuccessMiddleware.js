@@ -4,7 +4,9 @@ const loginMiddleware = () => next => (action) => {
     localStorage.token = user.token;
     localStorage.username = user.username;
     localStorage.email = user.email;
-    localStorage.admin = action.type.includes('ENGINEER_LOGIN_SUCCESS');
+    if (action.type.includes('ENGINEER_LOGIN_SUCCESS')) {
+      localStorage.admin = true;
+    }
   }
   return next(action);
 };

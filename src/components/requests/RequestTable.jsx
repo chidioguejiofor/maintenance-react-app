@@ -117,11 +117,9 @@ RequestTable.propTypes = {
   buttonLoading: PropTypes.bool,
   editedRequest: PropTypes.objectOf(PropTypes.any).isRequired,
   openModals: PropTypes.bool.isRequired,
-  admin: PropTypes.bool,
 };
 
 RequestTable.defaultProps = {
   buttonLoading: false,
-  admin: false,
 };
 export default RequestTable;
