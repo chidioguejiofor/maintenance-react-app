@@ -6,7 +6,7 @@ import RequestTable from '../../components/requests/RequestTable';
 import Header from '../../components/Header';
 import uploadImageAction from '../../actions/uploadImageAction';
 import { createRequest, updateRequest,
-  getUserRequests, getAllRequests } from '../../actions/requestAction';
+  getAllRequest } from '../../actions/requestAction';
 /**
  *this represents the Dashboard for both the admin and the
   regular users
@@ -18,18 +18,15 @@ export class Dashboard extends Component {
    */
   constructor(props) {
     super(props);
-    const { sendUploadImageRequest, match: { path } } = props;
+    const { sendUploadImageRequest } = props;
     this.state = {
       title: '',
       location: '',
       image: '',
       description: '',
       allowModalToOpen: undefined,
-      requests: [],
-
+      requests: []
     };
-    this.admin = path === '/dashboard/admin';
-
 
     this.fileReader = new FileReader();
     this.fileReader.addEventListener('load', () => {
@@ -50,10 +47,8 @@ export class Dashboard extends Component {
    @returns {void} performs an action and returns nothing
    */
   componentDidMount() {
-    const { sendLoadUserRequest,
-      sendLoadAllRequests } = this.props;
-    if (this.admin) return sendLoadAllRequests();
-    return sendLoadUserRequest();
+    const { sendLoadAllRequest } = this.props;
+    sendLoadAllRequest();
   }
 
   /**
@@ -64,7 +59,7 @@ export class Dashboard extends Component {
    @param {object} newProps this contains the new props
    */
   componentWillReceiveProps(newProps) {
-    const { sendLoadUserRequest } = this.props;
+    const { sendLoadAllRequest } = this.props;
 
     if (newProps.loadedRequest.requests) {
       this.setState({
@@ -80,7 +75,7 @@ export class Dashboard extends Component {
     if (newProps.currentRequest.success) {
       setTimeout(() => {
         this.setState({ allowModalToOpen: false });
-        sendLoadUserRequest();
+        sendLoadAllRequest();
       }, 1500);
     }
   }
@@ -173,7 +168,6 @@ export class Dashboard extends Component {
           buttonLoading={storeImage.isLoading}
           onSubmit={this.persistRequest}
           openModals={allowModalToOpen}
-          admin={this.admin}
         />
 
 
@@ -185,22 +179,20 @@ export class Dashboard extends Component {
 Dashboard.propTypes = {
   sendCreateRequest: PropTypes.func,
   sendUploadImageRequest: PropTypes.func,
-  sendLoadUserRequest: PropTypes.func,
+  sendLoadAllRequest: PropTypes.func,
   sendUpdateRequest: PropTypes.func,
   image: PropTypes.objectOf(PropTypes.any),
   currentRequest: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool])
   ),
   loadedRequest: PropTypes.objectOf(PropTypes.any),
-  sendLoadAllRequests: PropTypes.func,
 };
 
 Dashboard.defaultProps = {
   sendCreateRequest: () => {},
   sendUploadImageRequest: () => {},
-  sendLoadUserRequest: () => {},
+  sendLoadAllRequest: () => {},
   sendUpdateRequest: () => {},
-  sendLoadAllRequests: () => {},
   image: '',
   currentRequest: {},
   loadedRequest: false,
@@ -216,8 +208,7 @@ export const mapStateToProps = ({ image, loadedRequest, currentRequest }) => ({
 export const mapDispatchToProps = dispatch => ({
   sendUploadImageRequest: imageUrl => dispatch(uploadImageAction(imageUrl)),
   sendCreateRequest: request => dispatch(createRequest(request)),
-  sendLoadUserRequest: () => dispatch(getUserRequests()),
-  sendLoadAllRequests: () => dispatch(getAllRequests()),
+  sendLoadAllRequest: () => dispatch(getAllRequest()),
   sendUpdateRequest: request => dispatch(updateRequest(request)),
   resetCurrentRequest: () => dispatch({ type: 'REQUEST_RESET' }),
 

@@ -67,14 +67,12 @@ const initialLoadState = {
 };
 export const loadRequestReducer = (state = initialLoadState, action = {}) => {
   switch (action.type) {
-  case `${types.ENGINEER_LOAD_REQUEST}_RESET`:
   case `${types.LOAD_REQUEST}_RESET`:
     return {
       ...state,
       ...initialLoadState,
     };
 
-  case `${types.ENGINEER_LOAD_REQUEST}_LOADING`:
   case `${types.LOAD_REQUEST}_LOADING`:
   {
     return {
@@ -85,7 +83,6 @@ export const loadRequestReducer = (state = initialLoadState, action = {}) => {
     };
   }
 
-  case `${types.ENGINEER_LOAD_REQUEST}_SUCCESS`:
   case `${types.LOAD_REQUEST}_SUCCESS`:
   {
     const { result } = action.payload;
@@ -98,7 +95,6 @@ export const loadRequestReducer = (state = initialLoadState, action = {}) => {
     };
   }
 
-  case `${types.ENGINEER_LOAD_REQUEST}_FAILURE`:
   case `${types.LOAD_REQUEST}_FAILURE`: {
     const errors = action.payload;
     return {
