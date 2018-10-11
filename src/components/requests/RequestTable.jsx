@@ -22,11 +22,12 @@ const RequestTable = ({
               <span className="table-title">
                 YOUR REQUESTS
                 <RequestModalWithForm
+                  id="create-modal-form"
                   {...currentRequest}
                   onChange={onCreateRequestChange}
                   onClick={onCreateClick}
                   buttonLoading={buttonLoading}
-                  onSubmit={onSubmit}
+                  onSubmit={() => onSubmit('create')}
                   success={editedRequest.success}
                   loading={editedRequest.isLoading}
                   messageTitle={editedRequest.message}
