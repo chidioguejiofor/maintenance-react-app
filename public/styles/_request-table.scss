@@ -23,6 +23,7 @@
     .create-btn{
         position: relative;
         left: 30%;
+        display: none;
     }
     .update-btn{
         margin-right: 13px;
@@ -36,14 +37,31 @@
     @media all and (max-width:715px){
         margin-top: 0;
         padding: 0  0;
+        .title{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 30ch;
+        }
         .request-button{
             position: static;
             left: 80px;
         }
 
+        .request-info{
+            padding: 0;
+        }
         .create-btn{
             position: relative;
-            left: 5%;
+            left: 3%;
+        }
+    }
+
+    @media all and (min-width:600px){
+
+        .create-btn{
+            position: absolute;
+            display: none;
+            left: 15%;
         }
     }
 }

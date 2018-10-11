@@ -28,8 +28,10 @@ exports[`Testing the RequestTable Component the content it renders should match 
               YOUR REQUESTS
               <RequestModalWithForm
                 buttonLoading={false}
+                id="create-modal-form"
                 loading={false}
                 messageTitle=""
+                onSubmit={[Function]}
                 success={false}
               />
             </span>
