@@ -71,26 +71,6 @@ describe('Testing the RequestTable Component', () => {
         .toHaveBeenCalledTimes(2);
     });
 
-    it('should render the RequestModalWithForm with create option', () => {
-      const submitSpy = jest.fn();
-      const clickSpy = jest.fn();
-      const shallowObj = getShallowObj({
-        ...sampleProps,
-        requests: sampleRequests,
-        onSubmit: submitSpy,
-        onClick: clickSpy
-      });
-      const lastRequestModalProps = shallowObj
-        .find(RequestModalWithForm)
-        .first().props();
-      lastRequestModalProps.onSubmit();
-
-      expect(submitSpy)
-        .toHaveBeenNthCalledWith(1, 'create');
-      expect(submitSpy)
-        .toHaveBeenCalledTimes(1);
-    });
-
     it('should render the RequestModalWithForm with a click handler for each request', () => {
       const clickSpy = jest.fn();
       const shallowObj = getShallowObj({

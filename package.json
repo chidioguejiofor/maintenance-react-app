@@ -6,7 +6,7 @@
     "dev": "NODE_ENV=development webpack-dev-server --mode development --env.mode=development --open --hot",
     "start": "node server.js",
     "build": "webpack --mode production --env.mode=production",
-    "test": " jest -u",
+    "test": " jest",
     "update-snapshot": " jest --updateSnapshot",
     "test-watch": "nyc jest --watch --coverage",
     "coverage": "jest --coverage",
